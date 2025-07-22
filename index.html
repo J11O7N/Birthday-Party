@@ -4,11 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Birthday Party Invitation</title>
+<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@700&display=swap" rel="stylesheet">
 <style>
   body {
     margin: 0;
-    font-family: Arial, sans-serif;
-    background-color: #121212;
+    font-family: 'Raleway', Arial, sans-serif;
+    background: linear-gradient(135deg, #121212, #1e1e1e);
     color: #fff;
     display: flex;
     flex-direction: column;
@@ -16,15 +17,20 @@
     justify-content: center;
     min-height: 100vh;
     text-align: center;
+    overflow-x: hidden;
   }
   h1 {
     font-size: 3em;
     color: #ff2e63;
     margin-bottom: 0.2em;
+    animation: fadeIn 1s ease-out forwards;
+    opacity: 0;
   }
   p {
     font-size: 1.2em;
     margin: 0.5em 0;
+    animation: fadeIn 1.5s ease-out forwards;
+    opacity: 0;
   }
   .details {
     background: #1e1e1e;
@@ -32,6 +38,8 @@
     border-radius: 8px;
     box-shadow: 0 0 10px #ff2e63;
     margin-top: 1em;
+    animation: fadeIn 2s ease-out forwards;
+    opacity: 0;
   }
   .button {
     display: inline-block;
@@ -42,19 +50,77 @@
     background-color: #ff2e63;
     text-decoration: none;
     border-radius: 4px;
-    transition: background 0.3s ease;
+    transition: all 0.3s ease;
+    animation: fadeIn 2.5s ease-out forwards;
+    opacity: 0;
   }
   .button:hover {
     background-color: #ff5b8a;
+    transform: scale(1.05);
+    box-shadow: 0 0 15px #ff5b8a;
+  }
+
+  .polaroid {
+    width: 200px;
+    background: white;
+    padding: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+    text-align: center;
+    transform: rotate(-2deg);
+    transition: transform 0.3s ease;
+    margin-top: 20px;
+    animation: fadeIn 1.8s ease-out forwards;
+    opacity: 0;
+  }
+  .polaroid:hover {
+    transform: rotate(0deg) scale(1.05);
+  }
+  .polaroid img {
+    width: 100%;
+    border-radius: 5px;
+  }
+  .polaroid .caption {
+    font-size: 14px;
+    margin-top: 5px;
+    color: #333;
+  }
+
+  #response {
+    margin-top:1em; 
+    font-size:1.2em; 
+    color:#ff5b8a;
+    animation: fadeIn 3s ease-out forwards;
+    opacity: 0;
+  }
+
+  @keyframes fadeIn {
+    to {
+      opacity: 1;
+    }
+  }
+
+  @media (max-width: 600px) {
+    h1 {
+      font-size: 2em;
+    }
+    .details {
+      width: 90%;
+    }
+    .polaroid {
+      width: 150px;
+    }
   }
 </style>
 </head>
 <body>
 
-<h1>🔥 You're Invited! Hyunwoo birthday party🔥</h1>
+<h1>🔥 You're Invited! Hyunwoo birthday party 🔥</h1>
 <p>이름을 남겨주세요</p>
 
-<img src="friend.jpg" alt="Friend Photo">
+<div class="polaroid">
+  <img src="friend.jpg" alt="Friend Photo">
+  <div class="caption">Hyunwoo</div>
+</div>
 
 <div class="details">
   <p><strong>📍 Location:</strong> Itaewon</p>
@@ -63,16 +129,18 @@
 </div>
 
 <a href="#" class="button" onclick="rsvp()">Please enter your name</a>
-<div id="response" style="margin-top:1em; font-size:1.2em; color:#ff5b8a;"></div>
+<div id="response"></div>
 
 <script>
 const apiUrl = "https://script.google.com/macros/s/AKfycbzX5BGx7T9s3QPQZB6ZmxL_uVkO-FD_vbGZmdSs8eh6b5kAyhYXTo_MBDl08f1XfA-9gQ/exec";
 
 function showResponses(names) {
+  const response = document.getElementById("response");
+  response.style.opacity = 1;
   if (names.length === 0) {
-    document.getElementById("response").innerText = "아직 아무도 수락하지 않았습니다.";
+    response.innerText = "아직 아무도 수락하지 않았습니다.";
   } else {
-    document.getElementById("response").innerHTML =
+    response.innerHTML =
       names.map(name => `${name}님이 초대에 수락하셨습니다! 🎉`).join("<br>");
   }
 }
@@ -97,11 +165,12 @@ function loadResponses() {
     });
 }
 
-// 페이지 로드 시 표시
 window.onload = loadResponses;
 </script>
 
-
+<audio autoplay loop>
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
 
 </body>
 </html>
