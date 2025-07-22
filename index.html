@@ -60,7 +60,20 @@
   <p><strong>⏰ Time:</strong> 8:00 PM till late</p>
 </div>
 
-<a href="#" class="button">RSVP Now</a>
+<a href="#" class="button" onclick="rsvp()">RSVP Now</a>
+
+<div id="response" style="margin-top:1em; font-size:1.2em; color:#ff5b8a;"></div>
+
+<script>
+  function rsvp() {
+    const name = prompt("이름을 입력해주세요:");
+    if (name) {
+      document.getElementById("response").innerText =
+        `${name}님이 초대에 수락하셨습니다! 🎉`;
+    }
+  }
+</script>
+
 
 </body>
 </html>
